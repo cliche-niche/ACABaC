@@ -1,3 +1,0 @@
-a very generic input with some strings
-and some numbers 42 80085 that is supposed
-to be correct :)

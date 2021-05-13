@@ -4,42 +4,32 @@ var prompt = require('prompt-sync')();
 
 
 /*This program is for signing. It requires file name of private key, its 
-passphrase and the file name containing the text that is to be signed, in this order.
-For convenience, here are the parameters in reference to sample input:
-    "private.pem"   |   "le meow"   |   "cor.txt"       
-*/
-
-//sample input has already been signed once
+passphrase and the unencrypted text. 
+You can choose a different path for the file it signs into, if you want.*/
 
 
-var file = prompt("Enter the name of file containing the private key: ");
-var typ = file.substring(file.length-3, file.length); //type of file: pem or pub
+var priv = prompt("Enter the name of file containing the private key: "); //"private.pem" used in sample input
+var priv= fs.readFileSync(priv);
 
-var pass = prompt("Enter the passphrase: ");
+var pass = prompt("Enter the passphrase: "); //"le meow" used in sample input
 
-var privKey= fs.readFileSync(file);
-
-var privKeyObject = crypto.createPrivateKey({
-    key: privKey,
-    format: typ,
-    passphrase: pass
-})
-
-var privateKey = privKeyObject.export({
-    format: typ,
-    type: 'pkcs8',
-    cipher: 'aes-256-cbc',
-    passphrase: pass
-})
 
 //content to be signed
-var tbs = prompt("Enter name of file having content to be signed: ");
-tbs= fs.readFileSync(tbs);
+var tbs = prompt("Enter the text to be signed: "); //"generic input" used in sample input
 
 //signing
 var sig= crypto.createSign('SHA256');
 sig.write(tbs);
 sig.end();
 
-var s= sig.sign({key: privateKey, passphrase: pass, padding: crypto.constants.RSA_PKCS1_PSS_PADDING}); //PSS padding 
-fs.writeFileSync('sign.txt', s); //writing the signature in a file
+var s= sig.sign({key: priv, passphrase: pass, padding: crypto.constants.RSA_PKCS1_PSS_PADDING}); //uses PSS padding
+
+
+var loc= 'sign.txt'; //Default location
+var ch= prompt("Do you want to change the file location it writes the sign into? (Y/N)   ");
+ch= ch.toUpperCase();
+if(ch=='Y' || ch=='YES'){
+    loc= prompt("Enter path of new location: ");
+}
+
+fs.writeFileSync(loc, s);
