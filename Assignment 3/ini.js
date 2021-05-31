@@ -9,6 +9,7 @@ var buf; //for intermediate buffers
 
 var time = BigInt(now()); //current time
 
+
 var ni = parseInt(readline.question("\nEnter the number of inputs: "), 10); //number of inputs, 32 bit integer
 buf = Buffer.allocUnsafe(4); //allocate 4 bytes to buf, then write `ni` into it, then concatenate buf with tr_data
 buf.writeInt32BE(ni);
@@ -83,16 +84,4 @@ size:    32 bits       32 bytes     4 bytes         4 bytes=>  x bytes
 
 output: num of outputs, [num of coins, len of pubKey, pubkey]
 size:       32 bits         8 bytes        4 bytes => x bytes
-*/
-
-/*
-1
-ad
-23
-2
-afbc
-1
-257
-2
-1c69
 */
