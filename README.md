@@ -15,4 +15,9 @@ and [verify.js](./Assignment2/verify.js) for verifying the signature with the co
 
 ### [Assignment 3](./Assignment3)
 This assignment was about converting transaction data into **binary format** and storing it in a `.dat` file.
+
 [trData.js](./Assignment3/trData.js) is the only file.
+
+### [Assignment 4](./Assignment4)
+This assignment was the opposite of the previous assignment. It takes input in **binary format** and prints the details of transaction data.
+[readBinData.js](./Assignment4/readBinData.js) is the only file.
