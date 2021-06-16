@@ -46,7 +46,7 @@ tr_data = Buffer.concat([tr_data, buf]);
 
 for(var i=0; i<no; i++){
 
-    console.log(`\nOutput #${(i+1).toString()}+:`);
+    console.log(`\nOutput #${(i+1).toString()}:`);
 
     var nc = BigInt(readline.question("Enter the number of coins: ")); //number of coins, 64 bit integer
     buf = Buffer.allocUnsafe(8);
@@ -71,7 +71,7 @@ tr_data = Buffer.concat([buf, tr_data]);
 
 var tr_id = crypto.createHash('sha256').update(tr_data).digest('hex');
 
-var fileName = tr_id + ".dat";
+var fileName = "./" + tr_id + ".dat";
 
 fs.writeFileSync(fileName, tr_data);
 
