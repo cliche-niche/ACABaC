@@ -21,3 +21,8 @@ This assignment was about converting transaction data into **binary format** and
 ### [Assignment 4](./Assignment4)
 This assignment was the opposite of the previous assignment. It takes input in **binary format** and prints the details of transaction data.
 [readBinData.js](./Assignment4/readBinData.js) is the only file.
+
+
+### [Assignment 5](./Assignment5)
+This assignment calculates the block header for a given block body by asking for index of the block, hash of the parent block, target (corresponding to which a nonce is calculated), and lastly, the path to file containing the block.
+[nonce.js](./Assignment5/nonce.js) is the only file.
