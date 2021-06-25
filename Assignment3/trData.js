@@ -9,7 +9,6 @@ var buf; //for intermediate buffers
 
 var time = BigInt(now()); //current time
 
-
 var ni = parseInt(readline.question("\nEnter the number of inputs: "), 10); //number of inputs, 32 bit integer
 buf = Buffer.allocUnsafe(4); //allocate 4 bytes to buf, then write `ni` into it, then concatenate buf with tr_data
 buf.writeInt32BE(ni);
@@ -59,7 +58,8 @@ for(var i=0; i<no; i++){
     tr_data = Buffer.concat([tr_data, buf]);
 
     var pub = readline.question("Enter the public key: "); //public key, in .pem format
-    buf = Buffer.from(pub, 'base64');
+    pub = fs.readFileSync(pub);
+    buf = Buffer.from(pub, 'utf-8');
     tr_data = Buffer.concat([tr_data, buf]);
     
 }
@@ -78,10 +78,8 @@ fs.writeFileSync(fileName, tr_data);
 
 /* 
 time: take time=> convert to bigInt=> convert to 8 bytes
-
 input: num of inputs, [trans id, index of output, len of sig, signature]
 size:    32 bits       32 bytes     4 bytes         4 bytes=>  x bytes  
-
 output: num of outputs, [num of coins, len of pubKey, pubkey]
 size:       32 bits         8 bytes        4 bytes => x bytes
 */
