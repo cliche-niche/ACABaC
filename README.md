@@ -8,9 +8,11 @@ which, when appended to our data, produces a hash lesser than a given target.
 
 ### [Assignment 2](./Assignment2)
 This assignment was about **verifying signatures**.
-It contains three `.js` files, [generatePair.js](./Assignment2/generatePair.js) for generating a pair of 
-public and private keys, [sign.js](./Assignment2/sign.js) for signing with private key,
-and [verify.js](./Assignment2/verify.js) for verifying the signature with the corresponding public key.
+
+It contains three `.js` files:
+- [generatePair.js](./Assignment2/generatePair.js) for generating a pair of public and private keys
+- [sign.js](./Assignment2/sign.js) for signing with private key
+- [verify.js](./Assignment2/verify.js) for verifying the signature with the corresponding public key.
 
 
 ### [Assignment 3](./Assignment3)
@@ -20,9 +22,12 @@ This assignment was about converting transaction data into **binary format** and
 
 ### [Assignment 4](./Assignment4)
 This assignment was the opposite of the previous assignment. It takes input in **binary format** and prints the details of transaction data.
+
 [readBinData.js](./Assignment4/readBinData.js) is the only file.
 
 
 ### [Assignment 5](./Assignment5)
 This assignment calculates the block header for a given block body by asking for index of the block, hash of the parent block, target (corresponding to which a nonce is calculated), and lastly, the path to file containing the block.
-[nonce.js](./Assignment5/nonce.js) is the only file.
+It also uses the timestamp of the moment when a nonce value is used. 
+
+[nonce.js](./Assignment5/nonce.js) is the only `.js` file.

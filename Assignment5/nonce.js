@@ -3,35 +3,36 @@ var crypto = require("crypto");
 var fs = require("fs");
 var now =require("nano-time");
 
-var header = Buffer.allocUnsafe(116); //block header
-var offset=0;
+var header = Buffer.allocUnsafe(4); //block header
 var before = BigInt(now()), after;
 
-var ind = parseInt(readline.question("Enter the index of header: "), 10); //index
-header.writeInt32BE(ind, offset);
-offset += 4;
+var ind = parseInt(readline.question("Enter the index of header: "), 10); //index, 4 bytes
+header.writeInt32BE(ind);
 
-var parent = readline.question("Enter hash of the parent block: "); //hash of the parent block
-header.write(parent, offset);
-offset += 32;
+var parent = readline.question("Enter hash of the parent block: "); //hash of the parent block, 32 bytes
+var buf = Buffer.from(parent, 'hex');
+header = Buffer.concat([header, buf]);
 
-var target = readline.question("Enter the target: "); //target used to find the nonce
+var target = readline.question("Enter the target: "); //target used to find the nonce, 32 bytes
 
 var block = readline.question("Enter the path to file containing block: "); //block body
 block = fs.readFileSync(block);
-var hash = crypto.createHash('sha256').update(block).digest('hex');
-header.write(hash, offset);
-offset += 32;
+var hash = crypto.createHash('sha256').update(block).digest('hex'); //hash of block body, 32 bytes
+buf = Buffer.from(hash, 'hex');
+header = Buffer.concat([header, buf]);
 
-header.write(target, offset, 'hex');
-offset += 32;
+buf = Buffer.from(target, 'hex');
+header = Buffer.concat([header, buf]);
+buf = Buffer.allocUnsafe(8);
 
 var nonce = BigInt('0');
 
 while(1){
     var time = BigInt(now());
-    header.writeBigInt64BE(time, offset);
-    header.writeBigInt64BE(nonce, offset+8);
+    buf.writeBigInt64BE(time);
+    header = Buffer.concat([header, buf]);
+    buf.writeBigInt64BE(nonce);
+    header = Buffer.concat([header, buf]);
     if(crypto.createHash('sha256').update(header).digest('hex')<=target){
         after = BigInt(now());
         console.log("Nonce:", nonce);
@@ -41,6 +42,6 @@ while(1){
     nonce = nonce + 1n;
 }
 
-console.log((after-before)/(BigInt(1e9))); //Can be used to see the duration of execution
+console.log("Duration:", (after-before)/(BigInt(1e9))); //Can be used to see the duration of execution
 
-console.log(crypto.createHash('sha256').update(header).digest('hex'));
+console.log("Hash:", crypto.createHash('sha256').update(header).digest('hex'));
