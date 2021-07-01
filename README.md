@@ -28,6 +28,8 @@ This assignment was the opposite of the previous assignment. It takes input in *
 
 ### [Assignment 5](./Assignment5)
 This assignment calculates the block header for a given block body by asking for index of the block, hash of the parent block, target (corresponding to which a nonce is calculated), and lastly, the path to file containing the block.
-It also uses the timestamp of the moment when a nonce value is used. 
+It also uses the timestamp of the moment when a nonce value is used.
+The directory contains a [file](./Assignment5/sample.dat) that can be used to run the code with. 
+Some sample outputs are also included.
 
 [nonce.js](./Assignment5/nonce.js) is the only `.js` file.

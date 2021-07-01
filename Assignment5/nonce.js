@@ -26,8 +26,10 @@ header = Buffer.concat([header, buf]);
 buf = Buffer.allocUnsafe(8);
 
 var nonce = BigInt('0');
+var tmp = header;
 
 while(1){
+    header = tmp;
     var time = BigInt(now());
     buf.writeBigInt64BE(time);
     header = Buffer.concat([header, buf]);
