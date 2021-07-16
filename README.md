@@ -20,6 +20,7 @@ This assignment was about converting transaction data into **binary format** and
 
 [trData.js](./Assignment3/trData.js) is the only file.
 
+
 ### [Assignment 4](./Assignment4)
 This assignment was the opposite of the previous assignment. It takes input in **binary format** and prints the details of transaction data.
 
@@ -33,3 +34,9 @@ The directory contains a [file](./Assignment5/sample.dat) that can be used to ru
 Some sample outputs are also included.
 
 [nonce.js](./Assignment5/nonce.js) is the only `.js` file.
+
+
+### [Assignment 6](./Assignment6)
+This assignment has code for a web server, which listens on port 8787. On POSTing a `JSON` containing some data to `/hash`, it returns a `JSON` containing the SHA-256 hash of the data.
+
+[hashserver.js](./Assignment6/hashserver.js) is the only `.js` file.
